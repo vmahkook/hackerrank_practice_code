@@ -1,0 +1,42 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'plusMinus' function below.
+#
+# The function accepts INTEGER_ARRAY arr as parameter.
+#
+
+def plusMinus(arr):
+    # Write your code here
+    countpos=0
+    countneg=0
+    countze=0
+    for i in arr:
+        if i>0:
+            countpos+=1
+        elif i<0:
+            countneg+=1
+        else:
+            countze+=1
+            
+    pos=float(countpos/n)
+    neg=float(countneg/n)
+    ze=float(countze/n)
+    
+    print(pos)
+    print(neg)
+    print(ze)
+            
+
+if __name__ == '__main__':
+    n = int(input().strip())
+
+    arr = list(map(int, input().rstrip().split()))
+
+    plusMinus(arr)

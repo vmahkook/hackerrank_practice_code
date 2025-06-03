@@ -1,0 +1,39 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+from collections import Counter
+
+#
+# Complete the 'isValid' function below.
+#
+# The function is expected to return a STRING.
+# The function accepts STRING s as parameter.
+#
+
+def isValid(s):
+    # Write your code here
+    freq=Counter(s)
+    val=list(freq.values())
+    max_val=max(val)
+    min_val=min(val)
+    if max_val==min_val:
+        return "YES"
+    elif(val.count(max_val)==1 and max_val-1==min_val) or(val.count(min_val)==1 and min_val==1 and len(set(val))==2):
+        return "YES"
+    else:
+        return "NO"
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    s = input()
+
+    result = isValid(s)
+
+    fptr.write(result + '\n')
+
+    fptr.close()

@@ -1,0 +1,41 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'counterGame' function below.
+#
+# The function is expected to return a STRING.
+# The function accepts LONG_INTEGER n as parameter.
+#
+def is_power_of_two(n):
+    return (n & (n - 1)) == 0
+
+def counterGame(n):
+    moves = 0
+    while n != 1:
+        if is_power_of_two(n):
+            n = n // 2
+        else:
+            largest_power = 1 << (n.bit_length() - 1)
+            n -= largest_power
+        moves += 1
+    return "Louise" if moves % 2 != 0 else "Richard"
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    t = int(input().strip())
+
+    for t_itr in range(t):
+        n = int(input().strip())
+
+        result = counterGame(n)
+
+        fptr.write(result + '\n')
+
+    fptr.close()

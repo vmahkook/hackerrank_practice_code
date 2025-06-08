@@ -1,0 +1,64 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'climbingLeaderboard' function below.
+#
+# The function is expected to return an INTEGER_ARRAY.
+# The function accepts following parameters:
+#  1. INTEGER_ARRAY ranked
+#  2. INTEGER_ARRAY player
+#
+
+def climbingLeaderboard(ranked, player):
+    # Write your code here
+    unique_ranked = []
+    prev = None
+    for score in ranked:
+        if score != prev:
+            unique_ranked.append(score)
+            prev = score
+    
+    ranks = []
+    m = len(unique_ranked)
+    pointer = m - 1  # Start from the end of the unique_ranked list
+    
+    for score in player:
+        # Move the pointer to the right position
+        while pointer >= 0 and score > unique_ranked[pointer]:
+            pointer -= 1
+        if pointer == -1:
+            # All scores in unique_ranked are less than the player's score
+            rank = 1
+        elif score == unique_ranked[pointer]:
+            # The player's score matches a score in the leaderboard
+            rank = pointer + 1
+        else:
+            # The player's score is less than the current unique_ranked[pointer]
+            rank = pointer + 2
+        ranks.append(rank)
+    
+    return ranks
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    ranked_count = int(input().strip())
+
+    ranked = list(map(int, input().rstrip().split()))
+
+    player_count = int(input().strip())
+
+    player = list(map(int, input().rstrip().split()))
+
+    result = climbingLeaderboard(ranked, player)
+
+    fptr.write('\n'.join(map(str, result)))
+    fptr.write('\n')
+
+    fptr.close()

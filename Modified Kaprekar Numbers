@@ -1,0 +1,39 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'kaprekarNumbers' function below.
+#
+# The function accepts following parameters:
+#  1. INTEGER p
+#  2. INTEGER q
+#
+
+def kaprekarNumbers(p, q):
+    # Write your code here
+    result = []
+    for num in range(p, q + 1):
+        square = str(num ** 2)
+        d = len(str(num))
+        right = square[-d:]
+        left = square[:-d] if square[:-d] else '0'
+        if int(left) + int(right) == num:
+            result.append(num)
+
+    if result:
+        print(" ".join(map(str, result)))
+    else:
+        print("INVALID RANGE")
+
+
+if __name__ == '__main__':
+    p = int(input().strip())
+
+    q = int(input().strip())
+
+    kaprekarNumbers(p, q)
